@@ -1,0 +1,2 @@
+1)sqlite plugi:
+https://github.com/rizasif/sqlite-unity-plugin
