@@ -10,7 +10,7 @@ public class Fireball : MonoBehaviour
     private void Start(){
         rigidbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        GameObject.Find("AudioBoxEnemy").GetComponent<AudioBoxEnemy>().AudioPlay(GameObject.Find("AudioBoxEnemy").GetComponent<AudioBoxEnemy>().flyingFireball);
+        AudioBox.instance.AudioPlay(AudioName.FlyingFireball);
         Destroy(gameObject, 1);
     }
 
@@ -22,7 +22,7 @@ public class Fireball : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D a){
         if(a.gameObject.tag == "Player" || a.gameObject.tag == "ground"){
-            GameObject.Find("AudioBoxEnemy").GetComponent<AudioBoxEnemy>().AudioPlay(GameObject.Find("AudioBoxEnemy").GetComponent<AudioBoxEnemy>().explosingFireball);
+            AudioBox.instance.AudioPlay(AudioName.ExplosingFireball);
             Destroy(gameObject);
         }
             

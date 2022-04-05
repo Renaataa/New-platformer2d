@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class CharacterAnimation : MonoBehaviour
 {
+    public PlayerController playerController;
     public Joystick joystick;
     private Animator anim;
     private Rigidbody2D rb;
@@ -15,8 +16,13 @@ public class CharacterAnimation : MonoBehaviour
     int currLevel = 0;
     public float health = 10;
     public float energy;
-    bool activeBoost = false;
     bool protect = false;
+
+    private bool activeJumpBoost;
+    private bool activeSpeedBoost;
+    private bool activeProtectBoost;
+    
+    private bool crouch;
     public int coin;
     public int countHealth = 0;
     public int countJump = 0;
@@ -32,7 +38,9 @@ public class CharacterAnimation : MonoBehaviour
     public GameObject PanelWin;
     public GameObject ButtonNext;
 
-    void Start(){
+    void Start()
+    {
+        playerController = GetComponent<PlayerController>();
         Debug.Log("character anim start");
         panelBoost = GameObject.Find("PanelBoost");
         jumpBoost = GameObject.Find("JumpBoost");
@@ -71,35 +79,13 @@ public class CharacterAnimation : MonoBehaviour
 
     void ShowBoostPanelIfNeeded()
     {
-        panelBoost.SetActive(false);
-        healthBoost.SetActive(false);
-        jumpBoost.SetActive(false);
-        speedBoost.SetActive(false);
-        protectBoost.SetActive(false);
-
-        if(countHealth >0)
-        {
-            panelBoost.SetActive(true);
-            healthBoost.SetActive(true);
-        }
-
-        if(countJump >0)
-        {
-            panelBoost.SetActive(true);
-            jumpBoost.SetActive(true);
-        }
-
-        if( countSpeed>0 )
-        {
-            panelBoost.SetActive(true);
-             speedBoost.SetActive(true);
-        }
-
-        if(countProtect >0)
-        {
-            panelBoost.SetActive(true);
-            protectBoost.SetActive(true);
-        }
+        bool shouldOpenPanel = activeJumpBoost || activeProtectBoost || activeSpeedBoost || countHealth > 0 || countJump > 0 || countSpeed > 0 || countProtect > 0;
+        panelBoost.SetActive(shouldOpenPanel);
+        
+        healthBoost.SetActive(countHealth > 0);
+        jumpBoost.SetActive(activeJumpBoost || countJump > 0);
+        speedBoost.SetActive(activeSpeedBoost || countSpeed > 0);
+        protectBoost.SetActive(activeProtectBoost || countProtect > 0);
     }
 
     void UpdatePanelBoostValues()
@@ -115,50 +101,23 @@ public class CharacterAnimation : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision){
         if(collision.gameObject.tag == "win"){
-            //if(Convert.ToInt32(collision.gameObject.name) > level && level < 4){
-            //    level++;
-            //    PlayerPrefs.SetInt("Level", level);
-           // }
             PanelWin.SetActive(true);
             ButtonNext.SetActive(LoginPanel.loggedPlayerProgress.level <11 && currLevel <10);
             Time.timeScale = 0;
         }
-        if(collision.gameObject.tag == "Coin"){
-            coin += Convert.ToInt32(collision.gameObject.name);
-            GameObject.Find("CoinText").GetComponent<TextMeshProUGUI>().text = coin.ToString();
-            GameObject.Find("CoinText").GetComponent<Animation>().Play();
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().coin);
-            PlayerPrefs.SetInt("Coin", coin);
-            Destroy(collision.gameObject);
-        }
-        if(collision.gameObject.name == "Health"){
-            countHealth++;
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().pickUpBootle);
-            Destroy(collision.gameObject);
-        }
-        if(collision.gameObject.name == "Jump"){
-            countJump++;
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().pickUpBootle);
-            Destroy(collision.gameObject);
-        }
-        if(collision.gameObject.name == "Speed"){
-            countSpeed++;
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().pickUpBootle);
-            Destroy(collision.gameObject);
-        }
-        if(collision.gameObject.name == "Protect"){
-            countProtect++;
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().pickUpBootle);
-            Destroy(collision.gameObject);
-        }
 
-        ShowBoostPanelIfNeeded();
-        UpdatePanelBoostValues();
+        Pickup pickup = collision.GetComponent<Pickup>();
+        if (pickup != null && !pickup.collected)
+        {
+            GetPickup(pickup);
+            ShowBoostPanelIfNeeded();
+            UpdatePanelBoostValues();
+        }
     }
     public void BoostHealth(){
         if(countHealth > 0){
             countHealth--;
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().bonus);
+            AudioBox.instance.AudioPlay(AudioName.Bonus);
             GameObject.Find("HealthBoostText").GetComponent<TextMeshProUGUI>().text = countHealth.ToString();
         
             health += 3;
@@ -168,34 +127,34 @@ public class CharacterAnimation : MonoBehaviour
         }
     }
     public void BoostJump(){
-        if(countJump > 0 && activeBoost == false){
-            activeBoost = true;
+        if(countJump > 0 && !activeJumpBoost){
+            activeJumpBoost = true;
             countJump--;
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().bonus);
+            AudioBox.instance.AudioPlay(AudioName.Bonus);
             GameObject.Find("JumpBoostText").GetComponent<TextMeshProUGUI>().text = countJump.ToString();
             GameObject.Find("JumpBoost").GetComponent<Animation>().Play();
         
-            GameObject.Find("Player").GetComponent<PlayerController>().jumpForce *= 1.5f;
+            playerController.jumpForce *= 1.5f;
             Invoke("OffJump", 5);
         }
     }
     public void BoostSpeed(){
-        if(countSpeed > 0 && activeBoost == false){
-            activeBoost = true;
+        if(countSpeed > 0 && !activeSpeedBoost){
+            activeSpeedBoost = true;
             countSpeed--;
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().bonus);
+            AudioBox.instance.AudioPlay(AudioName.Bonus);
             GameObject.Find("SpeedBoostText").GetComponent<TextMeshProUGUI>().text = countSpeed.ToString();
             GameObject.Find("SpeedBoost").GetComponent<Animation>().Play();
         
-            GameObject.Find("Player").GetComponent<PlayerController>().speed *= 1.5f;
+            playerController.speed *= 1.5f;
             Invoke("OffSpeed", 5);
         }
     }
     public void BoostProtect(){
-        if(countProtect > 0 && activeBoost == false){
-            activeBoost = true;
+        if(countProtect > 0 && !activeProtectBoost){
+            activeProtectBoost = true;
             countProtect--;
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().bonus);
+            AudioBox.instance.AudioPlay(AudioName.Bonus);
             GameObject.Find("ProtectBoostText").GetComponent<TextMeshProUGUI>().text = countProtect.ToString();
             GameObject.Find("ProtectBoost").GetComponent<Animation>().Play();
 
@@ -204,22 +163,28 @@ public class CharacterAnimation : MonoBehaviour
         }
     }
     void OffJump(){
-        activeBoost = false;
-        GameObject.Find("Player").GetComponent<PlayerController>().jumpForce /= 1.5f;
+        activeJumpBoost = false;
+        playerController.jumpForce /= 1.5f;
+        ShowBoostPanelIfNeeded();
+        UpdatePanelBoostValues();
     }
     void OffSpeed(){
-        activeBoost = false;
-        GameObject.Find("Player").GetComponent<PlayerController>().speed /= 1.5f;
+        activeSpeedBoost = false;
+        playerController.speed /= 1.5f;
+        ShowBoostPanelIfNeeded();
+        UpdatePanelBoostValues();
     }
     void OffProtect(){
-        activeBoost = false;
+        activeProtectBoost = false;
         protect = false;
+        ShowBoostPanelIfNeeded();
+        UpdatePanelBoostValues();
     }
 
     private void OnCollisionEnter2D(Collision2D collision){
         if(collision.gameObject.tag == "Enemy" && protect == false){
             if(collision.gameObject.GetComponent<Angel>() == true){
-                GameObject.Find("AudioBoxEnemy").GetComponent<AudioBoxEnemy>().AudioPlay(GameObject.Find("AudioBoxEnemy").GetComponent<AudioBoxEnemy>().attackAngel);
+                AudioBox.instance.AudioPlay(AudioName.AttackAngel);
                 health -=3;
             }
             else if(collision.gameObject.GetComponent<Fireball>() == true)
@@ -227,7 +192,7 @@ public class CharacterAnimation : MonoBehaviour
             else if(collision.gameObject.GetComponent<Wizard>() == true)
                 health -=2;
             else if(collision.gameObject.GetComponent<Ghoul>() == true){
-                GameObject.Find("AudioBoxEnemy").GetComponent<AudioBoxEnemy>().AudioPlay(GameObject.Find("AudioBoxEnemy").GetComponent<AudioBoxEnemy>().attackGhoul);
+                AudioBox.instance.AudioPlay(AudioName.AttackGhoul);
                 health --;
                 Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>(), true);
                 coll = collision.collider;
@@ -238,7 +203,7 @@ public class CharacterAnimation : MonoBehaviour
             GameObject.Find("Blood").GetComponent<Animation>().Play();
 
             rb.constraints = RigidbodyConstraints2D.FreezePositionX|RigidbodyConstraints2D.FreezeRotation;
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().hurt);
+            AudioBox.instance.AudioPlay(AudioName.Hurt);
             anim.SetInteger("hurt", 0);
             
             Invoke("AnimHurtOff", 0.25f);
@@ -262,7 +227,7 @@ public class CharacterAnimation : MonoBehaviour
                 GameObject.Find("Blood").GetComponent<Animation>().Play();
                  
                 rb.constraints = RigidbodyConstraints2D.FreezePositionX|RigidbodyConstraints2D.FreezeRotation;
-                GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().hurt);
+                AudioBox.instance.AudioPlay(AudioName.Hurt);
                 anim.SetInteger("hurt", 0);
 
                 Invoke("HurtOff", 0.5f);
@@ -280,25 +245,37 @@ public class CharacterAnimation : MonoBehaviour
     void Update(){
         GameObject.Find("EnergyBar").GetComponent<FillEnergyBar>().CurrentValue = energy/50f;
         GameObject.Find("HealthBar").GetComponent<FillHealthBar>().CurrentValue = health*0.1f;
-        
-        if(joystick.Horizontal < 0 || joystick.Horizontal > 0){
-            //GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().walk);
-            anim.SetBool("isWalking", true);
-        } else {
-            anim.SetBool("isWalking", false);
+
+        if (!crouch)
+        {
+            if (joystick.Horizontal < 0 || joystick.Horizontal > 0)
+            {
+                anim.SetBool("isWalking", true);
+            }
+            else
+            {
+                anim.SetBool("isWalking", false);
+            }
         }
 
-        if(joystick.Vertical > 0.3 && GetComponent<PlayerController>().isGrounded == true){
-            if(!(joystick.Vertical <= 0)){
+        if(joystick.Vertical > 0.3 && playerController.isGrounded)
+        {
+            if(!(joystick.Vertical <= 0))
+            {
                 HitOff();
-                GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().jump);
+                AudioBox.instance.AudioPlay(AudioName.Jump);
                 anim.SetInteger("Jump", 0);
             }
             Invoke("AnimJumpOff", 0.15f);
         }
 
-        if((joystick.Vertical < -0.3) && GetComponent<PlayerController>().isGrounded == true){
+        if((joystick.Vertical < -0.3) && playerController.isGrounded)
+        {
             Crouch();
+        }
+        else if (crouch)
+        {
+            CrouchOff();
         }
     }
 
@@ -311,16 +288,19 @@ public class CharacterAnimation : MonoBehaviour
     }
 
     public void ButtonHit(){
-        if(GetComponent<PlayerController>().isGrounded == false){
+        if(!playerController.isGrounded)
+        {
             FlyingKick();
         }
-        if(GetComponent<PlayerController>().isGrounded == true){
+        
+        if(playerController.isGrounded)
+        {
             Hit();
         }
     }
 
     void FlyingKick(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().flyingKick);
+        AudioBox.instance.AudioPlay(AudioName.FlyingKick);
         anim.SetInteger("Jump", -1);
         anim.SetInteger("hit", 3);
 
@@ -334,7 +314,7 @@ public class CharacterAnimation : MonoBehaviour
     }
 
     void Hit(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().kick);
+        AudioBox.instance.AudioPlay(AudioName.Kick);
         hit = UnityEngine.Random.Range(0, 2);
         anim.SetInteger("hit", hit);
 
@@ -352,16 +332,25 @@ public class CharacterAnimation : MonoBehaviour
     }
 
     void Crouch(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().crouch);
-        anim.SetTrigger("crouch");
+        if (crouch)
+        {
+            return;
+        }
+
+        crouch = true;
+        AudioBox.instance.AudioPlay(AudioName.Crouch);
+
+        anim.SetBool("isWalking", false);
+        anim.SetBool("crouch",true);
 
         GetComponent<CapsuleCollider2D>().offset = new Vector2(-0.0001967549f, -0.1565886f);
         GetComponent<CapsuleCollider2D>().size = new Vector2(0.1009637f, 0.2951798f);  
         rb.constraints = RigidbodyConstraints2D.FreezePositionX|RigidbodyConstraints2D.FreezePositionY|RigidbodyConstraints2D.FreezeRotation;
-
-        Invoke("CrouchOff", 0.5f);
     }
-    void CrouchOff(){
+    void CrouchOff()
+    {
+        crouch = false;
+        anim.SetBool("crouch",false);
         GetComponent<CapsuleCollider2D>().offset = new Vector2(-0.005184233f, -0.07877457f);
         GetComponent<CapsuleCollider2D>().size = new Vector2(0.2300652f, 0.4508078f);
         rb.constraints = RigidbodyConstraints2D.None|RigidbodyConstraints2D.FreezeRotation;
@@ -379,13 +368,39 @@ public class CharacterAnimation : MonoBehaviour
         {
             energy = 0;
             energyBonus = true;
-            GetComponent<PlayerController>().speed += 0.1f;
+            playerController.speed += 0.1f;
             Invoke("EnergyBonusOff", 5);
         }
     }
 
     void EnergyBonusOff(){
         energyBonus = false;
-        GetComponent<PlayerController>().speed -= 0.1f;
+        playerController.speed -= 0.1f;
+    }
+
+    private void GetPickup(Pickup pickup)
+    {
+        switch (pickup.type)
+        {
+            case PickupType.Health:
+                countHealth += pickup.amount; 
+                break;
+            case PickupType.Jump: 
+                countJump += pickup.amount; 
+                break;
+            case PickupType.Protect:
+                countProtect += pickup.amount;
+                break;
+            case PickupType.Speed:
+                countSpeed += pickup.amount;
+                break;
+            case PickupType.Money:
+                coin += pickup.amount;
+                GameObject.Find("CoinText").GetComponent<TextMeshProUGUI>().text = coin.ToString();
+                GameObject.Find("CoinText").GetComponent<Animation>().Play();
+                PlayerPrefs.SetInt("Coin", coin);
+                break;
+        }
+        pickup.GetPickup();
     }
 }

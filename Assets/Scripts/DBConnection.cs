@@ -198,6 +198,17 @@ public class DBConnection //: MonoBehaviour
 		CloseDatabase();
 	}
 
+	public void ResetPlayerProgress()
+	{
+		string json = GetDefaultProgress();
+		OpenDatabase();
+		dbcmd = dbcon.CreateCommand();
+		string q_update = "UPDATE players SET progress = '"+json+"' WHERE login ='"+LoginPanel.USER_LOGIN+"'";
+		dbcmd.CommandText = q_update;
+		dbcmd.ExecuteNonQuery();
+		CloseDatabase();
+	}
+	
 	void CloseDatabase()
 	{
 		dbcon.Close();

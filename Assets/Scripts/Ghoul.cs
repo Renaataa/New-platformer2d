@@ -16,7 +16,6 @@ public class Ghoul : MonoBehaviour
 
     private void FixedUpdate(){
         transform.Translate(transform.right * spd * Time.deltaTime);
-        GameObject.Find("AudioBoxEnemy").GetComponent<AudioBoxEnemy>().AudioPlay(GameObject.Find("AudioBoxEnemy").GetComponent<AudioBoxEnemy>().walkGhoul);
     }
 
     private void OnCollisionEnter2D(Collision2D c){

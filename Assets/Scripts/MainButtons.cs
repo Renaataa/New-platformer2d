@@ -10,6 +10,9 @@ public class MainButtons : MonoBehaviour
     public GameObject panelSettings;
     public GameObject panelMain;
     public GameObject panelLevel;
+    public GameObject newGamePanel;
+    public GameObject helpPanel;
+    public HelpPanel helpPanelController;
     public GameObject ButtonPlay;
     public GameObject ButtonNewGame;
     DBConnection dbConnection;
@@ -23,45 +26,72 @@ public class MainButtons : MonoBehaviour
     }
     
     public void PauseOn(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().click);
+        AudioBox.instance.AudioPlay(AudioName.Click);
         panelPause.SetActive(true);
         Time.timeScale = 0;
     }
 
     public void PauseOff(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().click);
+        AudioBox.instance.AudioPlay(AudioName.Click);
         panelPause.SetActive(false);
         Time.timeScale = 1;
     }
 
     public void ShopOn(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().click);
+        AudioBox.instance.AudioPlay(AudioName.Click);
         panelShop.SetActive(true);
     }
 
     public void ShopOff(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().click);
+        AudioBox.instance.AudioPlay(AudioName.Click);
         panelShop.SetActive(false);
     }
 
     public void ResetScene(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().click);
+        AudioBox.instance.AudioPlay(AudioName.Click);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
     }
 
     public void ResetLevel(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().click);
+        AudioBox.instance.AudioPlay(AudioName.Click);
         SceneManager.LoadScene(Application.loadedLevel);
         Time.timeScale = 1;
     }
+
+    public void OnNewGame()
+    {
+        AudioBox.instance.AudioPlay(AudioName.Click);
+        panelMain.SetActive(false);
+        newGamePanel.SetActive(true);
+    }
+
+    public void OnNewGameBack()
+    {
+        AudioBox.instance.AudioPlay(AudioName.Click);
+        panelMain.SetActive(true);
+        newGamePanel.SetActive(false);
+    }
+    
     public void ResetGame(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().click);
+        AudioBox.instance.AudioPlay(AudioName.Click);
+        bool musicEnabled = PlayerPrefs.GetString("Music") != "no";
+        bool soundEnabled = PlayerPrefs.GetString("Sound") != "no";
+        
         PlayerPrefs.DeleteAll();
+        
+        dbConnection = new DBConnection();
+        dbConnection.ResetPlayerProgress();
+        LoginPanel.loggedPlayerProgress = dbConnection.GetPlayerProgress();
+        
+        PlayerPrefs.SetString("Music", musicEnabled ? "yes" : "no");
+        PlayerPrefs.SetString("Sound", soundEnabled ? "yes" : "no");
+        
+        Play();
     }
 
     public void Menu(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().click);
+        AudioBox.instance.AudioPlay(AudioName.Click);
         SceneManager.LoadScene("Menu");
     }
 
@@ -73,7 +103,7 @@ public class MainButtons : MonoBehaviour
 
     public void Play(){
         Debug.Log("Play: " + LoginPanel.loggedPlayerProgress.level);
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().click);
+        AudioBox.instance.AudioPlay(AudioName.Click);
         SceneManager.LoadScene(LoginPanel.loggedPlayerProgress.level.ToString());
         Time.timeScale = 1;
     }
@@ -131,25 +161,25 @@ public class MainButtons : MonoBehaviour
 
 
     public void Level(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().click);
+        AudioBox.instance.AudioPlay(AudioName.Click);
         //SceneManager.LoadScene("Level");
           panelMain.SetActive(false);
           panelLevel.SetActive(true);
     }
 
     public void LevelOff(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().click);
+        AudioBox.instance.AudioPlay(AudioName.Click);
           panelLevel.SetActive(false);
           SwitchToMainPanel();
     }
 
     public void Exit(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().click);
+        AudioBox.instance.AudioPlay(AudioName.Click);
         Application.Quit();
     }
 
     public void OnMusic(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().click);
+        AudioBox.instance.AudioPlay(AudioName.Click);
 
         if(PlayerPrefs.GetString("Music") != "no"){
             PlayerPrefs.SetString("Music", "no");
@@ -163,7 +193,7 @@ public class MainButtons : MonoBehaviour
     }
 
     public void OnSound(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().click);
+        AudioBox.instance.AudioPlay(AudioName.Click);
 
         if(PlayerPrefs.GetString("Sound") != "no"){
             PlayerPrefs.SetString("Sound", "no");
@@ -178,7 +208,7 @@ public class MainButtons : MonoBehaviour
 
     public void OnSettings(){
         panelMain.SetActive(false);
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().click);
+        AudioBox.instance.AudioPlay(AudioName.Click);
         panelSettings.SetActive(true);
 
         if(PlayerPrefs.GetString("Music") == "no"){
@@ -197,7 +227,7 @@ public class MainButtons : MonoBehaviour
     }
 
     public void OffSettings(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().click);
+        AudioBox.instance.AudioPlay(AudioName.Click);
         panelSettings.SetActive(false);
         panelMain.SetActive(true);
     }
@@ -215,5 +245,20 @@ public class MainButtons : MonoBehaviour
     public void SwitchOffMainPanel()
     {
         panelMain.SetActive(false);
+    }
+
+    public void OnHelp()
+    {
+        AudioBox.instance.AudioPlay(AudioName.Click);
+        helpPanelController.SetHelpPanel();
+        panelMain.SetActive(false);
+        helpPanel.SetActive(true);
+    }
+
+    public void OnHelpClose()
+    {
+        AudioBox.instance.AudioPlay(AudioName.Click);
+        panelMain.SetActive(true);
+        helpPanel.SetActive(false);
     }
 }

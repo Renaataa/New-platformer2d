@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,6 +40,8 @@ public class LoginPanel : MonoBehaviour
 
     public GameObject pleaseLoginInfo;
 
+    public static Action OnLoginUser;
+    
     void Start()
     {
         dbConnection = new DBConnection();
@@ -177,6 +180,7 @@ public class LoginPanel : MonoBehaviour
             PlayerProgress loggedPlayerProgress  = dbConnection.GetPlayerProgress(); 
             LoginPanel.loggedPlayerProgress = loggedPlayerProgress;
             SwitchToMainCont();
+            OnLoginUser?.Invoke();
         }
         else
         {
@@ -237,7 +241,7 @@ public class LoginPanel : MonoBehaviour
 
     public void PlayBtnClickSound()
     {
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().click);
+        AudioBox.instance.AudioPlay(AudioName.Click);
     }
 }
     
