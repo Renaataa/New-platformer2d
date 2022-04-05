@@ -123,33 +123,11 @@ public class CharacterAnimation : MonoBehaviour
             ButtonNext.SetActive(LoginPanel.loggedPlayerProgress.level <11 && currLevel <10);
             Time.timeScale = 0;
         }
-        if(collision.gameObject.tag == "Coin"){
-            coin += Convert.ToInt32(collision.gameObject.name);
-            GameObject.Find("CoinText").GetComponent<TextMeshProUGUI>().text = coin.ToString();
-            GameObject.Find("CoinText").GetComponent<Animation>().Play();
-            AudioBox.instance.AudioPlay(AudioName.Coin);
-            PlayerPrefs.SetInt("Coin", coin);
-            Destroy(collision.gameObject);
-        }
-        if(collision.gameObject.name == "Ś"){
-            countHealth++;
-            AudioBox.instance.AudioPlay(AudioName.PickUpBottle);
-            Destroy(collision.gameObject);
-        }
-        if(collision.gameObject.name == "Jump"){
-            countJump++;
-            AudioBox.instance.AudioPlay(AudioName.PickUpBottle);
-            Destroy(collision.gameObject);
-        }
-        if(collision.gameObject.name == "Speed"){
-            countSpeed++;
-            AudioBox.instance.AudioPlay(AudioName.PickUpBottle);
-            Destroy(collision.gameObject);
-        }
-        if(collision.gameObject.name == "Protect"){
-            countProtect++;
-            AudioBox.instance.AudioPlay(AudioName.PickUpBottle);
-            Destroy(collision.gameObject);
+
+        Pickup pickup = collision.GetComponent<Pickup>();
+        if (pickup != null)
+        {
+            GetPickup(pickup);
         }
 
         ShowBoostPanelIfNeeded();
@@ -387,5 +365,31 @@ public class CharacterAnimation : MonoBehaviour
     void EnergyBonusOff(){
         energyBonus = false;
         GetComponent<PlayerController>().speed -= 0.1f;
+    }
+
+    private void GetPickup(Pickup pickup)
+    {
+        switch (pickup.type)
+        {
+            case PickupType.Health:
+                countHealth += pickup.amount; 
+                break;
+            case PickupType.Jump: 
+                countJump += pickup.amount; 
+                break;
+            case PickupType.Protect:
+                countProtect += pickup.amount;
+                break;
+            case PickupType.Speed:
+                countSpeed += pickup.amount;
+                break;
+            case PickupType.Money:
+                coin += pickup.amount;
+                GameObject.Find("CoinText").GetComponent<TextMeshProUGUI>().text = coin.ToString();
+                GameObject.Find("CoinText").GetComponent<Animation>().Play();
+                PlayerPrefs.SetInt("Coin", coin);
+                break;
+        }
+        pickup.GetPickup();
     }
 }
