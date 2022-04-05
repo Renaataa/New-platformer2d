@@ -1,0 +1,20 @@
+public enum AudioName
+{
+    Click,
+    Bonus,
+    PickUpBottle,
+    Coin,
+    Crouch,
+    FlyingKick,
+    Hurt,
+    Kick,
+    Walk,
+    Jump,
+    AttackAngel,
+    FlyingAngel,
+    ExplosingFireball,
+    FlyingFireball,
+    AttackGhoul,
+    WalkGhoul,
+    Wizard
+}

@@ -127,28 +127,28 @@ public class CharacterAnimation : MonoBehaviour
             coin += Convert.ToInt32(collision.gameObject.name);
             GameObject.Find("CoinText").GetComponent<TextMeshProUGUI>().text = coin.ToString();
             GameObject.Find("CoinText").GetComponent<Animation>().Play();
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().coin);
+            AudioBox.instance.AudioPlay(AudioName.Coin);
             PlayerPrefs.SetInt("Coin", coin);
             Destroy(collision.gameObject);
         }
-        if(collision.gameObject.name == "Health"){
+        if(collision.gameObject.name == "Ś"){
             countHealth++;
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().pickUpBootle);
+            AudioBox.instance.AudioPlay(AudioName.PickUpBottle);
             Destroy(collision.gameObject);
         }
         if(collision.gameObject.name == "Jump"){
             countJump++;
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().pickUpBootle);
+            AudioBox.instance.AudioPlay(AudioName.PickUpBottle);
             Destroy(collision.gameObject);
         }
         if(collision.gameObject.name == "Speed"){
             countSpeed++;
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().pickUpBootle);
+            AudioBox.instance.AudioPlay(AudioName.PickUpBottle);
             Destroy(collision.gameObject);
         }
         if(collision.gameObject.name == "Protect"){
             countProtect++;
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().pickUpBootle);
+            AudioBox.instance.AudioPlay(AudioName.PickUpBottle);
             Destroy(collision.gameObject);
         }
 
@@ -158,7 +158,7 @@ public class CharacterAnimation : MonoBehaviour
     public void BoostHealth(){
         if(countHealth > 0){
             countHealth--;
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().bonus);
+            AudioBox.instance.AudioPlay(AudioName.Bonus);
             GameObject.Find("HealthBoostText").GetComponent<TextMeshProUGUI>().text = countHealth.ToString();
         
             health += 3;
@@ -171,7 +171,7 @@ public class CharacterAnimation : MonoBehaviour
         if(countJump > 0 && activeBoost == false){
             activeBoost = true;
             countJump--;
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().bonus);
+            AudioBox.instance.AudioPlay(AudioName.Bonus);
             GameObject.Find("JumpBoostText").GetComponent<TextMeshProUGUI>().text = countJump.ToString();
             GameObject.Find("JumpBoost").GetComponent<Animation>().Play();
         
@@ -183,7 +183,7 @@ public class CharacterAnimation : MonoBehaviour
         if(countSpeed > 0 && activeBoost == false){
             activeBoost = true;
             countSpeed--;
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().bonus);
+            AudioBox.instance.AudioPlay(AudioName.Bonus);
             GameObject.Find("SpeedBoostText").GetComponent<TextMeshProUGUI>().text = countSpeed.ToString();
             GameObject.Find("SpeedBoost").GetComponent<Animation>().Play();
         
@@ -195,7 +195,7 @@ public class CharacterAnimation : MonoBehaviour
         if(countProtect > 0 && activeBoost == false){
             activeBoost = true;
             countProtect--;
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().bonus);
+            AudioBox.instance.AudioPlay(AudioName.Bonus);
             GameObject.Find("ProtectBoostText").GetComponent<TextMeshProUGUI>().text = countProtect.ToString();
             GameObject.Find("ProtectBoost").GetComponent<Animation>().Play();
 
@@ -219,7 +219,7 @@ public class CharacterAnimation : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision){
         if(collision.gameObject.tag == "Enemy" && protect == false){
             if(collision.gameObject.GetComponent<Angel>() == true){
-                GameObject.Find("AudioBoxEnemy").GetComponent<AudioBoxEnemy>().AudioPlay(GameObject.Find("AudioBoxEnemy").GetComponent<AudioBoxEnemy>().attackAngel);
+                AudioBox.instance.AudioPlay(AudioName.AttackAngel);
                 health -=3;
             }
             else if(collision.gameObject.GetComponent<Fireball>() == true)
@@ -227,7 +227,7 @@ public class CharacterAnimation : MonoBehaviour
             else if(collision.gameObject.GetComponent<Wizard>() == true)
                 health -=2;
             else if(collision.gameObject.GetComponent<Ghoul>() == true){
-                GameObject.Find("AudioBoxEnemy").GetComponent<AudioBoxEnemy>().AudioPlay(GameObject.Find("AudioBoxEnemy").GetComponent<AudioBoxEnemy>().attackGhoul);
+                AudioBox.instance.AudioPlay(AudioName.AttackGhoul);
                 health --;
                 Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>(), true);
                 coll = collision.collider;
@@ -238,7 +238,7 @@ public class CharacterAnimation : MonoBehaviour
             GameObject.Find("Blood").GetComponent<Animation>().Play();
 
             rb.constraints = RigidbodyConstraints2D.FreezePositionX|RigidbodyConstraints2D.FreezeRotation;
-            GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().hurt);
+            AudioBox.instance.AudioPlay(AudioName.Hurt);
             anim.SetInteger("hurt", 0);
             
             Invoke("AnimHurtOff", 0.25f);
@@ -262,7 +262,7 @@ public class CharacterAnimation : MonoBehaviour
                 GameObject.Find("Blood").GetComponent<Animation>().Play();
                  
                 rb.constraints = RigidbodyConstraints2D.FreezePositionX|RigidbodyConstraints2D.FreezeRotation;
-                GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().hurt);
+                AudioBox.instance.AudioPlay(AudioName.Hurt);
                 anim.SetInteger("hurt", 0);
 
                 Invoke("HurtOff", 0.5f);
@@ -291,7 +291,7 @@ public class CharacterAnimation : MonoBehaviour
         if(joystick.Vertical > 0.3 && GetComponent<PlayerController>().isGrounded == true){
             if(!(joystick.Vertical <= 0)){
                 HitOff();
-                GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().jump);
+                AudioBox.instance.AudioPlay(AudioName.Jump);
                 anim.SetInteger("Jump", 0);
             }
             Invoke("AnimJumpOff", 0.15f);
@@ -320,7 +320,7 @@ public class CharacterAnimation : MonoBehaviour
     }
 
     void FlyingKick(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().flyingKick);
+        AudioBox.instance.AudioPlay(AudioName.FlyingKick);
         anim.SetInteger("Jump", -1);
         anim.SetInteger("hit", 3);
 
@@ -334,7 +334,7 @@ public class CharacterAnimation : MonoBehaviour
     }
 
     void Hit(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().kick);
+        AudioBox.instance.AudioPlay(AudioName.Kick);
         hit = UnityEngine.Random.Range(0, 2);
         anim.SetInteger("hit", hit);
 
@@ -352,7 +352,7 @@ public class CharacterAnimation : MonoBehaviour
     }
 
     void Crouch(){
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().crouch);
+        AudioBox.instance.AudioPlay(AudioName.Crouch);
         anim.SetTrigger("crouch");
 
         GetComponent<CapsuleCollider2D>().offset = new Vector2(-0.0001967549f, -0.1565886f);

@@ -8757,16 +8757,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c535eed74f3f2e44a9074c4ee6355ad3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  click: {fileID: 8300000, guid: 515d4e8f841c72b429eeef822eac3287, type: 3}
-  bonus: {fileID: 8300000, guid: 3fad5e3cf2a103b498b621b0c194cdab, type: 3}
-  pickUpBootle: {fileID: 8300000, guid: 0d1b2914a1e870748917fdcc753aaa35, type: 3}
-  coin: {fileID: 8300000, guid: 498f57c42505ff8459e2e8459a7d07a8, type: 3}
-  crouch: {fileID: 8300000, guid: 6ab80dd76ebf5ce45a3292e24fc14e5f, type: 3}
-  flyingKick: {fileID: 8300000, guid: 8b417c18226d9064b852c1f70a54ae6e, type: 3}
-  hurt: {fileID: 8300000, guid: 171152e3714bdb443b1bd2931b1399ba, type: 3}
-  kick: {fileID: 8300000, guid: 13d2ac7dc4b50c74e95e8778fcace0ce, type: 3}
-  walk: {fileID: 8300000, guid: d9f4595d8c5ec77449675560e499d5cc, type: 3}
-  jump: {fileID: 8300000, guid: c43777131613e1041a706e31d52561ee, type: 3}
+  clips:
+  - name: 0
+    clip: {fileID: 8300000, guid: 515d4e8f841c72b429eeef822eac3287, type: 3}
+  - name: 1
+    clip: {fileID: 8300000, guid: 3fad5e3cf2a103b498b621b0c194cdab, type: 3}
+  - name: 2
+    clip: {fileID: 8300000, guid: 0d1b2914a1e870748917fdcc753aaa35, type: 3}
+  - name: 3
+    clip: {fileID: 8300000, guid: 498f57c42505ff8459e2e8459a7d07a8, type: 3}
+  - name: 4
+    clip: {fileID: 8300000, guid: 6ab80dd76ebf5ce45a3292e24fc14e5f, type: 3}
+  - name: 5
+    clip: {fileID: 8300000, guid: 8b417c18226d9064b852c1f70a54ae6e, type: 3}
+  - name: 6
+    clip: {fileID: 8300000, guid: 171152e3714bdb443b1bd2931b1399ba, type: 3}
+  - name: 7
+    clip: {fileID: 8300000, guid: 13d2ac7dc4b50c74e95e8778fcace0ce, type: 3}
+  - name: 8
+    clip: {fileID: 8300000, guid: d9f4595d8c5ec77449675560e499d5cc, type: 3}
+  - name: 9
+    clip: {fileID: 8300000, guid: c43777131613e1041a706e31d52561ee, type: 3}
+  - name: 10
+    clip: {fileID: 8300000, guid: 2840b854298c36e4fb5f752afc63dad2, type: 3}
+  - name: 11
+    clip: {fileID: 8300000, guid: b8e72d4d869a7524b9c2821a2cb09b73, type: 3}
+  - name: 12
+    clip: {fileID: 8300000, guid: 9fa05180a1a3bf1418fc974a16a5bbfe, type: 3}
+  - name: 13
+    clip: {fileID: 8300000, guid: 7750a94405dac4444a47810e7bafa091, type: 3}
+  - name: 14
+    clip: {fileID: 8300000, guid: 1ea83149cf9712c408d15679bf21581a, type: 3}
+  - name: 15
+    clip: {fileID: 8300000, guid: 3181c5ec12632de4394dbff4ba8f538d, type: 3}
+  - name: 16
+    clip: {fileID: 8300000, guid: 91e9a6b96427c27479ffbc113b79cc3e, type: 3}
+  source: {fileID: 1100725692}
 --- !u!1 &1144133425
 GameObject:
   m_ObjectHideFlags: 0

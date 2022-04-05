@@ -4,29 +4,36 @@ using UnityEngine;
 
 public class Angel : MonoBehaviour
 {
+    public AudioSource audioSource;
+    
     Rigidbody2D rigidbody;
     Animator animator;
     SpriteRenderer spriteRenderer;
     bool att = false;
     private float hlth = 30;
 
+    private Transform playerTransform;
+    
     private void Start(){
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerTransform = GameObject.Find("Player").transform;
     } 
 
     private void FixedUpdate(){
         if(att == true){
-            GameObject.Find("AudioBoxEnemy").GetComponent<AudioBoxEnemy>().AudioPlay(GameObject.Find("AudioBoxEnemy").GetComponent<AudioBoxEnemy>().flyingAngel);
             animator.SetInteger("Angel", 1);
-            transform.position = Vector2.Lerp(transform.position, GameObject.Find("Player").transform.position, Time.deltaTime);
+            transform.position = Vector2.Lerp(transform.position, playerTransform.position, Time.deltaTime);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D a){
-        if(a.gameObject.tag == "Player")
+        if (a.gameObject.tag == "Player")
+        {
             att = true;
+            audioSource.Play();
+        }
 
         if(a.gameObject.tag == "EnemyDamage"){
             Damage();
@@ -42,6 +49,7 @@ public class Angel : MonoBehaviour
         if(hlth <= 0){
             animator.SetInteger("Angel", 2);
             att = false;
+            audioSource.Stop();
             rigidbody.constraints = RigidbodyConstraints2D.FreezePositionX|RigidbodyConstraints2D.FreezePositionY|RigidbodyConstraints2D.FreezeRotation;
             Invoke("Destroy", 0.6f);
         }

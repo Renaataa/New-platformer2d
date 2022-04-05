@@ -237,7 +237,7 @@ public class LoginPanel : MonoBehaviour
 
     public void PlayBtnClickSound()
     {
-        GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().click);
+        AudioBox.instance.AudioPlay(AudioName.Click);
     }
 }
     
