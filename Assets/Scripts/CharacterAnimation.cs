@@ -17,6 +17,7 @@ public class CharacterAnimation : MonoBehaviour
     public float energy;
     bool activeBoost = false;
     bool protect = false;
+    private bool crouch;
     public int coin;
     public int countHealth = 0;
     public int countJump = 0;
@@ -125,7 +126,7 @@ public class CharacterAnimation : MonoBehaviour
         }
 
         Pickup pickup = collision.GetComponent<Pickup>();
-        if (pickup != null)
+        if (pickup != null && !pickup.collected)
         {
             GetPickup(pickup);
         }
@@ -258,16 +259,23 @@ public class CharacterAnimation : MonoBehaviour
     void Update(){
         GameObject.Find("EnergyBar").GetComponent<FillEnergyBar>().CurrentValue = energy/50f;
         GameObject.Find("HealthBar").GetComponent<FillHealthBar>().CurrentValue = health*0.1f;
-        
-        if(joystick.Horizontal < 0 || joystick.Horizontal > 0){
-            //GameObject.Find("AudioBox").GetComponent<AudioBox>().AudioPlay(GameObject.Find("AudioBox").GetComponent<AudioBox>().walk);
-            anim.SetBool("isWalking", true);
-        } else {
-            anim.SetBool("isWalking", false);
+
+        if (!crouch)
+        {
+            if (joystick.Horizontal < 0 || joystick.Horizontal > 0)
+            {
+                anim.SetBool("isWalking", true);
+            }
+            else
+            {
+                anim.SetBool("isWalking", false);
+            }
         }
 
-        if(joystick.Vertical > 0.3 && GetComponent<PlayerController>().isGrounded == true){
-            if(!(joystick.Vertical <= 0)){
+        if(joystick.Vertical > 0.3 && GetComponent<PlayerController>().isGrounded == true)
+        {
+            if(!(joystick.Vertical <= 0))
+            {
                 HitOff();
                 AudioBox.instance.AudioPlay(AudioName.Jump);
                 anim.SetInteger("Jump", 0);
@@ -277,6 +285,10 @@ public class CharacterAnimation : MonoBehaviour
 
         if((joystick.Vertical < -0.3) && GetComponent<PlayerController>().isGrounded == true){
             Crouch();
+        }
+        else if (crouch)
+        {
+            CrouchOff();
         }
     }
 
@@ -330,16 +342,25 @@ public class CharacterAnimation : MonoBehaviour
     }
 
     void Crouch(){
+        if (crouch)
+        {
+            return;
+        }
+
+        crouch = true;
         AudioBox.instance.AudioPlay(AudioName.Crouch);
-        anim.SetTrigger("crouch");
+
+        anim.SetBool("isWalking", false);
+        anim.SetBool("crouch",true);
 
         GetComponent<CapsuleCollider2D>().offset = new Vector2(-0.0001967549f, -0.1565886f);
         GetComponent<CapsuleCollider2D>().size = new Vector2(0.1009637f, 0.2951798f);  
         rb.constraints = RigidbodyConstraints2D.FreezePositionX|RigidbodyConstraints2D.FreezePositionY|RigidbodyConstraints2D.FreezeRotation;
-
-        Invoke("CrouchOff", 0.5f);
     }
-    void CrouchOff(){
+    void CrouchOff()
+    {
+        crouch = false;
+        anim.SetBool("crouch",false);
         GetComponent<CapsuleCollider2D>().offset = new Vector2(-0.005184233f, -0.07877457f);
         GetComponent<CapsuleCollider2D>().size = new Vector2(0.2300652f, 0.4508078f);
         rb.constraints = RigidbodyConstraints2D.None|RigidbodyConstraints2D.FreezeRotation;
