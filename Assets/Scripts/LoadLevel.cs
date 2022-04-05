@@ -3,18 +3,30 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
+using TMPro;
 
 public class LoadLevel : MonoBehaviour, IPointerDownHandler
 {
-    bool loaded = false;
+    public int levelToLoad;
+    public Color inactiveColor;
+    public Color activeColor;
+    public Image backgroundImage;
+    public TextMeshProUGUI levelText;
     
+    bool loaded = false;
+
     private void Start()
     {
-        Debug.Log(LoginPanel.loggedPlayerProgress.level);
-        if(LoginPanel.loggedPlayerProgress.level >= Convert.ToInt32(gameObject.name)){
-            gameObject.GetComponentInChildren<Image>().color =  new Color(0.651f, 0.549f, 0.345f);
-            loaded = true;
-        }
+        LoginPanel.OnLoginUser += SetLevel;
+        levelText.text = levelToLoad.ToString();
+        SetLevel();
+    }
+
+    private void SetLevel()
+    {
+        loaded = LoginPanel.loggedPlayerProgress.level >= levelToLoad;
+        backgroundImage.color = loaded ? activeColor : inactiveColor;
+        
     }
     
     public void OnPointerDown(PointerEventData e)
@@ -22,8 +34,13 @@ public class LoadLevel : MonoBehaviour, IPointerDownHandler
         AudioBox.instance.AudioPlay(AudioName.Click);
         if(loaded)
         {
-            SceneManager.LoadScene(Convert.ToInt32(gameObject.name).ToString());
+            SceneManager.LoadScene(levelToLoad.ToString());
             Time.timeScale = 1;
         }
+    }
+
+    private void OnDestroy()
+    {
+        LoginPanel.OnLoginUser -= SetLevel;
     }
 }

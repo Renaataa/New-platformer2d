@@ -49,6 +49,7 @@ MonoBehaviour:
   type: 4
   amount: 1
   audioName: 3
+  collected: 0
 --- !u!212 &9208104560824830666
 SpriteRenderer:
   m_ObjectHideFlags: 0

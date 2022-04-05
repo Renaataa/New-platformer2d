@@ -57,7 +57,17 @@ public class MainButtons : MonoBehaviour
     }
     public void ResetGame(){
         AudioBox.instance.AudioPlay(AudioName.Click);
+        bool musicEnabled = PlayerPrefs.GetString("Music") != "no";
+        bool soundEnabled = PlayerPrefs.GetString("Sound") != "no";
+        
         PlayerPrefs.DeleteAll();
+        
+        dbConnection = new DBConnection();
+        dbConnection.ResetPlayerProgress();
+        LoginPanel.loggedPlayerProgress = dbConnection.GetPlayerProgress();
+        
+        PlayerPrefs.SetString("Music", musicEnabled ? "yes" : "no");
+        PlayerPrefs.SetString("Sound", soundEnabled ? "yes" : "no");
     }
 
     public void Menu(){

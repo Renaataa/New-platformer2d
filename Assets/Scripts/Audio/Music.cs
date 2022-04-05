@@ -6,21 +6,13 @@ public class Music : MonoBehaviour
 {
     private void Start()
     {
-        if(PlayerPrefs.GetString("Music") == "no")
-        {
-            GetComponent<AudioSource>().enabled = false;
-        }
-        else
-        {
-            GetComponent<AudioSource>().enabled = true;
-        }
+        SetMusicEnabled();
     }
 
     public void SetMusicEnabled()
     {
-        Debug.Log((PlayerPrefs.GetString("Music") == "no"));
-        bool musicEnabled = PlayerPrefs.GetString("Music") == "no";
-        Debug.Log(musicEnabled);
-        GetComponent<AudioSource>().enabled = !musicEnabled;
+        bool musicDisabled = PlayerPrefs.GetString("Music") == "no";
+        GetComponent<AudioSource>().enabled = !musicDisabled;
+        Debug.Log("Music enabled : " + !musicDisabled);
     }
 }

@@ -49,6 +49,7 @@ MonoBehaviour:
   type: 4
   amount: 10
   audioName: 3
+  collected: 0
 --- !u!212 &8071925199432334198
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -125,7 +126,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 0.1893671, y: 0.1190386}
-  m_EdgeRadius: 1
+  m_EdgeRadius: 0
 --- !u!95 &2094588396991056467
 Animator:
   serializedVersion: 3
