@@ -10,6 +10,9 @@ public class MainButtons : MonoBehaviour
     public GameObject panelSettings;
     public GameObject panelMain;
     public GameObject panelLevel;
+    public GameObject newGamePanel;
+    public GameObject helpPanel;
+    public HelpPanel helpPanelController;
     public GameObject ButtonPlay;
     public GameObject ButtonNewGame;
     DBConnection dbConnection;
@@ -55,6 +58,21 @@ public class MainButtons : MonoBehaviour
         SceneManager.LoadScene(Application.loadedLevel);
         Time.timeScale = 1;
     }
+
+    public void OnNewGame()
+    {
+        AudioBox.instance.AudioPlay(AudioName.Click);
+        panelMain.SetActive(false);
+        newGamePanel.SetActive(true);
+    }
+
+    public void OnNewGameBack()
+    {
+        AudioBox.instance.AudioPlay(AudioName.Click);
+        panelMain.SetActive(true);
+        newGamePanel.SetActive(false);
+    }
+    
     public void ResetGame(){
         AudioBox.instance.AudioPlay(AudioName.Click);
         bool musicEnabled = PlayerPrefs.GetString("Music") != "no";
@@ -68,6 +86,8 @@ public class MainButtons : MonoBehaviour
         
         PlayerPrefs.SetString("Music", musicEnabled ? "yes" : "no");
         PlayerPrefs.SetString("Sound", soundEnabled ? "yes" : "no");
+        
+        Play();
     }
 
     public void Menu(){
@@ -225,5 +245,20 @@ public class MainButtons : MonoBehaviour
     public void SwitchOffMainPanel()
     {
         panelMain.SetActive(false);
+    }
+
+    public void OnHelp()
+    {
+        AudioBox.instance.AudioPlay(AudioName.Click);
+        helpPanelController.SetHelpPanel();
+        panelMain.SetActive(false);
+        helpPanel.SetActive(true);
+    }
+
+    public void OnHelpClose()
+    {
+        AudioBox.instance.AudioPlay(AudioName.Click);
+        panelMain.SetActive(true);
+        helpPanel.SetActive(false);
     }
 }
