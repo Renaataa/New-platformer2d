@@ -221,6 +221,7 @@ public class LoginPanel : MonoBehaviour
         USER_LOGIN = login;
         PlayerProgress loggedPlayerProgress  = dbConnection.GetPlayerProgress(); 
         LoginPanel.loggedPlayerProgress = loggedPlayerProgress;
+        OnLoginUser?.Invoke();
         SwitchToMainCont();
     }
 
