@@ -183,10 +183,12 @@ public class MainButtons : MonoBehaviour
 
         if(PlayerPrefs.GetString("Music") != "no"){
             PlayerPrefs.SetString("Music", "no");
+            AudioBox.instance.MusicEnable(false);
             GameObject.Find("TextMusic").GetComponent<TextMeshProUGUI>().text = "Music: off";
         }
         else{
             PlayerPrefs.SetString("Music", "yes");
+            AudioBox.instance.MusicEnable(true);
             GameObject.Find("TextMusic").GetComponent<TextMeshProUGUI>().text = "Music: on";
         }
         //SceneManager.LoadScene(Application.loadedLevel);
@@ -197,10 +199,12 @@ public class MainButtons : MonoBehaviour
 
         if(PlayerPrefs.GetString("Sound") != "no"){
             PlayerPrefs.SetString("Sound", "no");
+            AudioBox.instance.SoundsEnable(false);
             GameObject.Find("TextSound").GetComponent<TextMeshProUGUI>().text = "Sound: off";
         }
         else{
             PlayerPrefs.SetString("Sound", "yes");
+            AudioBox.instance.SoundsEnable(true);
             GameObject.Find("TextSound").GetComponent<TextMeshProUGUI>().text = "Sound: on";
         }
         //SceneManager.LoadScene(Application.loadedLevel);
