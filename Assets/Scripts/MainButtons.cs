@@ -2,6 +2,10 @@
 using UnityEngine.SceneManagement;
 using TMPro;
 using System;
+using System.Collections.Generic;
+using Code.BaseSystems.Settings;
+using Code.BaseSystems.Translations;
+using UnityEngine.Events;
 
 public class MainButtons : MonoBehaviour
 {
@@ -15,16 +19,27 @@ public class MainButtons : MonoBehaviour
     public HelpPanel helpPanelController;
     public GameObject ButtonPlay;
     public GameObject ButtonNewGame;
+    public TMP_Dropdown languagesDropdown;
+    public TextMeshProUGUI musicSettingText;
+    public TextMeshProUGUI soundSettingText;
+    
     DBConnection dbConnection;
 
-    void Start()
+    private void Start()
     {
         if(SceneManager.GetActiveScene().name == "Menu")
         {
             SwitchToMainPanel();
         }
+
+        TranslationsManager.Instance.OnLanguageChange += TranslationsManager_OnLanguageChange;
     }
-    
+
+    private void OnDestroy()
+    {
+        TranslationsManager.Instance.OnLanguageChange -= TranslationsManager_OnLanguageChange;
+    }
+
     public void PauseOn(){
         AudioBox.instance.AudioPlay(AudioName.Click);
         panelPause.SetActive(true);
@@ -75,18 +90,13 @@ public class MainButtons : MonoBehaviour
     
     public void ResetGame(){
         AudioBox.instance.AudioPlay(AudioName.Click);
-        bool musicEnabled = PlayerPrefs.GetString("Music") != "no";
-        bool soundEnabled = PlayerPrefs.GetString("Sound") != "no";
-        
         PlayerPrefs.DeleteAll();
         
+        SettingsManager.Instance.SaveSettings();
         dbConnection = new DBConnection();
         dbConnection.ResetPlayerProgress();
         LoginPanel.loggedPlayerProgress = dbConnection.GetPlayerProgress();
-        
-        PlayerPrefs.SetString("Music", musicEnabled ? "yes" : "no");
-        PlayerPrefs.SetString("Sound", soundEnabled ? "yes" : "no");
-        
+
         Play();
     }
 
@@ -181,15 +191,17 @@ public class MainButtons : MonoBehaviour
     public void OnMusic(){
         AudioBox.instance.AudioPlay(AudioName.Click);
 
-        if(PlayerPrefs.GetString("Music") != "no"){
-            PlayerPrefs.SetString("Music", "no");
+        if(SettingsManager.Instance.Music)
+        {
+            SettingsManager.Instance.Music = false;
             AudioBox.instance.MusicEnable(false);
-            GameObject.Find("TextMusic").GetComponent<TextMeshProUGUI>().text = "Music: off";
+            GameObject.Find("TextMusic").GetComponent<TextMeshProUGUI>().text = TranslationsManager.Instance.GetPhrase("musicOff");
         }
-        else{
-            PlayerPrefs.SetString("Music", "yes");
+        else
+        {
+            SettingsManager.Instance.Music = true;
             AudioBox.instance.MusicEnable(true);
-            GameObject.Find("TextMusic").GetComponent<TextMeshProUGUI>().text = "Music: on";
+            GameObject.Find("TextMusic").GetComponent<TextMeshProUGUI>().text = TranslationsManager.Instance.GetPhrase("musicOn");
         }
         //SceneManager.LoadScene(Application.loadedLevel);
     }
@@ -197,15 +209,17 @@ public class MainButtons : MonoBehaviour
     public void OnSound(){
         AudioBox.instance.AudioPlay(AudioName.Click);
 
-        if(PlayerPrefs.GetString("Sound") != "no"){
-            PlayerPrefs.SetString("Sound", "no");
+        if(SettingsManager.Instance.Sound)
+        {
+            SettingsManager.Instance.Sound = false;
             AudioBox.instance.SoundsEnable(false);
-            GameObject.Find("TextSound").GetComponent<TextMeshProUGUI>().text = "Sound: off";
+            GameObject.Find("TextSound").GetComponent<TextMeshProUGUI>().text = TranslationsManager.Instance.GetPhrase("soundOff");
         }
-        else{
-            PlayerPrefs.SetString("Sound", "yes");
+        else
+        {
+            SettingsManager.Instance.Sound = true;
             AudioBox.instance.SoundsEnable(true);
-            GameObject.Find("TextSound").GetComponent<TextMeshProUGUI>().text = "Sound: on";
+            GameObject.Find("TextSound").GetComponent<TextMeshProUGUI>().text = TranslationsManager.Instance.GetPhrase("soundOn");
         }
         //SceneManager.LoadScene(Application.loadedLevel);
     }
@@ -214,23 +228,25 @@ public class MainButtons : MonoBehaviour
         panelMain.SetActive(false);
         AudioBox.instance.AudioPlay(AudioName.Click);
         panelSettings.SetActive(true);
+        PrepareLanguagesSettings();
 
-        if(PlayerPrefs.GetString("Music") == "no"){
-            GameObject.Find("TextMusic").GetComponent<TextMeshProUGUI>().text = "Music: off";
+        if(!SettingsManager.Instance.Music){
+            GameObject.Find("TextMusic").GetComponent<TextMeshProUGUI>().text = TranslationsManager.Instance.GetPhrase("musicOff");
         }
         else{
-            GameObject.Find("TextMusic").GetComponent<TextMeshProUGUI>().text = "Music: on";
+            GameObject.Find("TextMusic").GetComponent<TextMeshProUGUI>().text = TranslationsManager.Instance.GetPhrase("musicOn");
         }
 
-        if(PlayerPrefs.GetString("Sound") == "no"){
-            GameObject.Find("TextSound").GetComponent<TextMeshProUGUI>().text = "Sound: off";
+        if(!SettingsManager.Instance.Sound){
+            GameObject.Find("TextSound").GetComponent<TextMeshProUGUI>().text = TranslationsManager.Instance.GetPhrase("soundOff");
         }
         else{
-            GameObject.Find("TextSound").GetComponent<TextMeshProUGUI>().text = "Sound: on";
+            GameObject.Find("TextSound").GetComponent<TextMeshProUGUI>().text = TranslationsManager.Instance.GetPhrase("soundOn");
         }
     }
 
     public void OffSettings(){
+        SettingsManager.Instance.SaveSettings();
         AudioBox.instance.AudioPlay(AudioName.Click);
         panelSettings.SetActive(false);
         panelMain.SetActive(true);
@@ -264,5 +280,31 @@ public class MainButtons : MonoBehaviour
         AudioBox.instance.AudioPlay(AudioName.Click);
         panelMain.SetActive(true);
         helpPanel.SetActive(false);
+    }
+
+    private void PrepareLanguagesSettings()
+    {
+        List<string> languages = TranslationsManager.Instance.GetLanguagesList();
+        languagesDropdown.ClearOptions();
+        languagesDropdown.AddOptions(languages);
+        languagesDropdown.SetValueWithoutNotify((int)SettingsManager.Instance.Language);
+        languagesDropdown.onValueChanged.RemoveAllListeners();
+        languagesDropdown.onValueChanged.AddListener(ChangeLanguage);
+    }
+
+    private void ChangeLanguage(int dropdownValue)
+    {
+        SettingsManager.Instance.Language = TranslationsManager.Instance.LanguageFromDropdownValue(dropdownValue).Id;
+    }
+
+    private void TranslationsManager_OnLanguageChange()
+    {
+        bool musicOn = SettingsManager.Instance.Music;
+        bool soundOn = SettingsManager.Instance.Sound;
+        if (musicSettingText != null && soundSettingText != null)
+        {
+            musicSettingText.text = TranslationsManager.Instance.GetPhrase(musicOn ? "musicOn" : "musicOff");
+            soundSettingText.text = TranslationsManager.Instance.GetPhrase(soundOn ? "soundOn" : "soundOff");
+        }
     }
 }

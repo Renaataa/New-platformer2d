@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Code.BaseSystems.Settings;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -29,7 +30,7 @@ public class AudioBox : MonoBehaviour
 
     public void AudioPlay(AudioName audioName)
     {
-        if (PlayerPrefs.GetString("Sound") != "no")
+        if (SettingsManager.Instance.Sound)
         {
             AudioPair pair = clips.Find(p => p.name == audioName);
             if (pair != null)
@@ -51,14 +52,7 @@ public class AudioBox : MonoBehaviour
 
     private void SetupSounds()
     {
-        if (PlayerPrefs.HasKey("Music"))
-        {
-            MusicEnable(PlayerPrefs.GetString("Music") != "no");
-        }
-
-        if (PlayerPrefs.HasKey("Sound"))
-        {
-            SoundsEnable(PlayerPrefs.GetString("Sound") != "no");
-        }
+        MusicEnable(SettingsManager.Instance.Music);
+        SoundsEnable(SettingsManager.Instance.Sound);
     }
 }

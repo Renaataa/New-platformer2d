@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Code.BaseSystems.Settings;
 using UnityEngine;
 
 public class Music : MonoBehaviour
@@ -11,8 +10,7 @@ public class Music : MonoBehaviour
 
     public void SetMusicEnabled()
     {
-        bool musicDisabled = PlayerPrefs.GetString("Music") == "no";
-        GetComponent<AudioSource>().enabled = !musicDisabled;
-        Debug.Log("Music enabled : " + !musicDisabled);
+        bool musicEnabled = SettingsManager.Instance.Music;
+        GetComponent<AudioSource>().enabled = musicEnabled;
     }
 }
