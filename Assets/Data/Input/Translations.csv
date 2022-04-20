@@ -1,0 +1,40 @@
+id,en,pl,ua
+account,Account,Konto,Aкаунт
+login,Login,Login,Логін
+loginButton,Login,Zaloguj się,Залогуватися
+register,Register,Zarejestruj się,Зареєструватися
+gameTitle,Hell Dungeon,Piekielne Podziemie ,Пекельне Підземелля
+logoff,Logoff,Wyloguj,Вийти
+back,Back,Wstecz ,Назад
+loginToStart,Please login to start the game,"Zaloguj się, aby rozpocząć grę","Будь ласка, залогуйтеся, щоб почати гру"
+enterLogin,Enter login...,Wpisz login...,Введіть логін...
+password,Password,Hasło,Пароль
+enterPassword,Enter password...,Wprowadź hasło...,Введіть пароль...
+fieldsCantEmpty,Fields can not be empty,Pola nie mogą być puste,Поля не можуть бути порожніми
+incorrectLoginPassword,Incorrect login or password,Nieprawidłowy login lub hasło,Неправильний логін або пароль
+loginUsed,Login is already used,Login jest już używany,Логін уже використовується
+passwordDoesntMatch,Password and Confirm does not match,Hasło i potwierdzenie nie pasują,Пароль і підтвердження не збігаються
+confirm,Confirm,Potwierdzenie,Підтвердження
+confirmPassword,Confirm password...,Potwierdź hasło...,Підтвердіть пароль...
+settings,Settings,Ustawienia,Налаштування
+musicOn,Music: on,Muzyka: wł,Музика: увімк
+musicOff,Music: off,Muzyka: wył,Музика: вимкн
+soundOn,Sound: on,Dzwięk: wł,Звук: увімк
+soundOff,Sound: off,Dzwięk: wył,Звук: вимкн
+newGame,New Game,Nowa Gra,Нова Гра
+continue,Continue,Kontyntynuj,Продовжити
+levels,Levels,Poziomy,Рівні
+exit,Exit,Wyjście,Вихід
+pause,Pause,Pauza,Пауза
+play,Play,Grać,Грати
+shop,Shop,Sklep,Магазин
+reset,Reset,Zresetować,Перепройти
+menu,Menu,Menu,Меню
+gameOver,GameOver,Koniec Gry,Кінець Гри
+win,Win,Wygrana,Перемога
+next,Next,Następny,Далі
+buy,Buy,Kupić,Купити
+sureYouWantReset,"Are you sure, you want to reset your progress and start a new game?",Czy na pewno chcesz zresetować progres i rozpocząć nową grę?,
+yes,Yes,Tak,
+no,No,Nie,
+close,Close,Zamknij,

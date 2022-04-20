@@ -1,0 +1,176 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ebe8d6010dbb454984e8ae9ff6f3a75, type: 3}
+  m_Name: TranslationsDictionary
+  m_EditorClassIdentifier: 
+  entriesList:
+  - id: account
+    en: Account
+    pl: Konto
+    ua: "A\u043A\u0430\u0443\u043D\u0442"
+  - id: login
+    en: Login
+    pl: Login
+    ua: "\u041B\u043E\u0433\u0456\u043D"
+  - id: loginButton
+    en: Login
+    pl: "Zaloguj si\u0119"
+    ua: "\u0417\u0430\u043B\u043E\u0433\u0443\u0432\u0430\u0442\u0438\u0441\u044F"
+  - id: register
+    en: Register
+    pl: "Zarejestruj si\u0119"
+    ua: "\u0417\u0430\u0440\u0435\u0454\u0441\u0442\u0440\u0443\u0432\u0430\u0442\u0438\u0441\u044F"
+  - id: gameTitle
+    en: Hell Dungeon
+    pl: Piekielne Podziemie
+    ua: "\u041F\u0435\u043A\u0435\u043B\u044C\u043D\u0435 \u041F\u0456\u0434\u0437\u0435\u043C\u0435\u043B\u043B\u044F"
+  - id: logoff
+    en: Logoff
+    pl: Wyloguj
+    ua: "\u0412\u0438\u0439\u0442\u0438"
+  - id: back
+    en: Back
+    pl: Wstecz
+    ua: "\u041D\u0430\u0437\u0430\u0434"
+  - id: loginToStart
+    en: Please login to start the game
+    pl: "Zaloguj si\u0119, aby rozpocz\u0105\u0107 gr\u0119"
+    ua: "\u0411\u0443\u0434\u044C \u043B\u0430\u0441\u043A\u0430, \u0437\u0430\u043B\u043E\u0433\u0443\u0439\u0442\u0435\u0441\u044F,
+      \u0449\u043E\u0431 \u043F\u043E\u0447\u0430\u0442\u0438 \u0433\u0440\u0443"
+  - id: enterLogin
+    en: Enter login...
+    pl: Wpisz login...
+    ua: "\u0412\u0432\u0435\u0434\u0456\u0442\u044C \u043B\u043E\u0433\u0456\u043D..."
+  - id: password
+    en: Password
+    pl: "Has\u0142o"
+    ua: "\u041F\u0430\u0440\u043E\u043B\u044C"
+  - id: enterPassword
+    en: Enter password...
+    pl: "Wprowad\u017A has\u0142o..."
+    ua: "\u0412\u0432\u0435\u0434\u0456\u0442\u044C \u043F\u0430\u0440\u043E\u043B\u044C..."
+  - id: fieldsCantEmpty
+    en: Fields can not be empty
+    pl: "Pola nie mog\u0105 by\u0107 puste"
+    ua: "\u041F\u043E\u043B\u044F \u043D\u0435 \u043C\u043E\u0436\u0443\u0442\u044C
+      \u0431\u0443\u0442\u0438 \u043F\u043E\u0440\u043E\u0436\u043D\u0456\u043C\u0438"
+  - id: incorrectLoginPassword
+    en: Incorrect login or password
+    pl: "Nieprawid\u0142owy login lub has\u0142o"
+    ua: "\u041D\u0435\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u0438\u0439
+      \u043B\u043E\u0433\u0456\u043D \u0430\u0431\u043E \u043F\u0430\u0440\u043E\u043B\u044C"
+  - id: loginUsed
+    en: Login is already used
+    pl: "Login jest ju\u017C u\u017Cywany"
+    ua: "\u041B\u043E\u0433\u0456\u043D \u0443\u0436\u0435 \u0432\u0438\u043A\u043E\u0440\u0438\u0441\u0442\u043E\u0432\u0443\u0454\u0442\u044C\u0441\u044F"
+  - id: passwordDoesntMatch
+    en: Password and Confirm does not match
+    pl: "Has\u0142o i potwierdzenie nie pasuj\u0105"
+    ua: "\u041F\u0430\u0440\u043E\u043B\u044C \u0456 \u043F\u0456\u0434\u0442\u0432\u0435\u0440\u0434\u0436\u0435\u043D\u043D\u044F
+      \u043D\u0435 \u0437\u0431\u0456\u0433\u0430\u044E\u0442\u044C\u0441\u044F"
+  - id: confirm
+    en: Confirm
+    pl: Potwierdzenie
+    ua: "\u041F\u0456\u0434\u0442\u0432\u0435\u0440\u0434\u0436\u0435\u043D\u043D\u044F"
+  - id: confirmPassword
+    en: Confirm password...
+    pl: "Potwierd\u017A has\u0142o..."
+    ua: "\u041F\u0456\u0434\u0442\u0432\u0435\u0440\u0434\u0456\u0442\u044C \u043F\u0430\u0440\u043E\u043B\u044C..."
+  - id: settings
+    en: Settings
+    pl: Ustawienia
+    ua: "\u041D\u0430\u043B\u0430\u0448\u0442\u0443\u0432\u0430\u043D\u043D\u044F"
+  - id: musicOn
+    en: 'Music: on'
+    pl: "Muzyka: w\u0142"
+    ua: "\u041C\u0443\u0437\u0438\u043A\u0430: \u0443\u0432\u0456\u043C\u043A"
+  - id: musicOff
+    en: 'Music: off'
+    pl: "Muzyka: wy\u0142"
+    ua: "\u041C\u0443\u0437\u0438\u043A\u0430: \u0432\u0438\u043C\u043A\u043D"
+  - id: soundOn
+    en: 'Sound: on'
+    pl: "Dzwi\u0119k: w\u0142"
+    ua: "\u0417\u0432\u0443\u043A: \u0443\u0432\u0456\u043C\u043A"
+  - id: soundOff
+    en: 'Sound: off'
+    pl: "Dzwi\u0119k: wy\u0142"
+    ua: "\u0417\u0432\u0443\u043A: \u0432\u0438\u043C\u043A\u043D"
+  - id: newGame
+    en: New Game
+    pl: Nowa Gra
+    ua: "\u041D\u043E\u0432\u0430 \u0413\u0440\u0430"
+  - id: continue
+    en: Continue
+    pl: Kontyntynuj
+    ua: "\u041F\u0440\u043E\u0434\u043E\u0432\u0436\u0438\u0442\u0438"
+  - id: levels
+    en: Levels
+    pl: Poziomy
+    ua: "\u0420\u0456\u0432\u043D\u0456"
+  - id: exit
+    en: Exit
+    pl: "Wyj\u015Bcie"
+    ua: "\u0412\u0438\u0445\u0456\u0434"
+  - id: pause
+    en: Pause
+    pl: Pauza
+    ua: "\u041F\u0430\u0443\u0437\u0430"
+  - id: play
+    en: Play
+    pl: "Gra\u0107"
+    ua: "\u0413\u0440\u0430\u0442\u0438"
+  - id: shop
+    en: Shop
+    pl: Sklep
+    ua: "\u041C\u0430\u0433\u0430\u0437\u0438\u043D"
+  - id: reset
+    en: Reset
+    pl: "Zresetowa\u0107"
+    ua: "\u041F\u0435\u0440\u0435\u043F\u0440\u043E\u0439\u0442\u0438"
+  - id: menu
+    en: Menu
+    pl: Menu
+    ua: "\u041C\u0435\u043D\u044E"
+  - id: gameOver
+    en: GameOver
+    pl: Koniec Gry
+    ua: "\u041A\u0456\u043D\u0435\u0446\u044C \u0413\u0440\u0438"
+  - id: win
+    en: Win
+    pl: Wygrana
+    ua: "\u041F\u0435\u0440\u0435\u043C\u043E\u0433\u0430"
+  - id: next
+    en: Next
+    pl: "Nast\u0119pny"
+    ua: "\u0414\u0430\u043B\u0456"
+  - id: buy
+    en: Buy
+    pl: "Kupi\u0107"
+    ua: "\u041A\u0443\u043F\u0438\u0442\u0438"
+  - id: sureYouWantReset
+    en: Are you sure, you want to reset your progress and start a new game?
+    pl: "Czy na pewno chcesz zresetowa\u0107 progres i rozpocz\u0105\u0107 now\u0105
+      gr\u0119?"
+    ua: 
+  - id: yes
+    en: Yes
+    pl: Tak
+    ua: 
+  - id: no
+    en: No
+    pl: Nie
+    ua: 
+  - id: close
+    en: Close
+    pl: Zamknij
+    ua: 
