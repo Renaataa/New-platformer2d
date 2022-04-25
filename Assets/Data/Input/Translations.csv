@@ -34,7 +34,7 @@ gameOver,GameOver,Koniec Gry,Кінець Гри
 win,Win,Wygrana,Перемога
 next,Next,Następny,Далі
 buy,Buy,Kupić,Купити
-sureYouWantReset,"Are you sure, you want to reset your progress and start a new game?",Czy na pewno chcesz zresetować progres i rozpocząć nową grę?,
-yes,Yes,Tak,
-no,No,Nie,
-close,Close,Zamknij,
+sureYouWantReset,"Are you sure, you want to reset your progress and start a new game?",Czy na pewno chcesz zresetować progres i rozpocząć nową grę?,"Ви впевнені, що хочете скинути свій прогрес і почати нову гру?"
+yes,Yes,Tak,Так
+no,No,Nie,Ні
+close,Close,Zamknij,Закрити
