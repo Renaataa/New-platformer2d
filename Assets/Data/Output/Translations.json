@@ -1,119 +1,236 @@
 [
   {
-    "id,en,pl,ua": "account,Account,Konto,Aкаунт"
+    "id": "account",
+    "en": "Account",
+    "pl": "Konto",
+    "ua": "Aкаунт"
   },
   {
-    "id,en,pl,ua": "login,Login,Login,Логін"
+    "id": "login",
+    "en": "Login",
+    "pl": "Login",
+    "ua": "Логін"
   },
   {
-    "id,en,pl,ua": "loginButton,Login,Zaloguj się,Залогуватися"
+    "id": "loginButton",
+    "en": "Login",
+    "pl": "Zaloguj się",
+    "ua": "Залогуватися"
   },
   {
-    "id,en,pl,ua": "register,Register,Zarejestruj się,Зареєструватися"
+    "id": "register",
+    "en": "Register",
+    "pl": "Zarejestruj się",
+    "ua": "Зареєструватися"
   },
   {
-    "id,en,pl,ua": "gameTitle,Hell Dungeon,Piekielne Podziemie ,Пекельне Підземелля"
+    "id": "gameTitle",
+    "en": "Hell Dungeon",
+    "pl": "Piekielne Podziemie",
+    "ua": "Пекельне Підземелля"
   },
   {
-    "id,en,pl,ua": "logoff,Logoff,Wyloguj,Вийти"
+    "id": "logoff",
+    "en": "Logoff",
+    "pl": "Wyloguj",
+    "ua": "Вийти"
   },
   {
-    "id,en,pl,ua": "back,Back,Wstecz ,Назад"
+    "id": "back",
+    "en": "Back",
+    "pl": "Wstecz",
+    "ua": "Назад"
   },
   {
-    "id,en,pl,ua": "loginToStart,Please login to start the game,Zaloguj się, aby rozpocząć grę,Будь ласка, залогуйтеся, щоб почати гру"
+    "id": "loginToStart",
+    "en": "Please login to start the game",
+    "pl": "Zaloguj się, aby rozpocząć grę",
+    "ua": "Будь ласка, залогуйтеся, щоб почати гру"
   },
   {
-    "id,en,pl,ua": "enterLogin,Enter login...,Wpisz login...,Введіть логін..."
+    "id": "enterLogin",
+    "en": "Enter login...",
+    "pl": "Wpisz login...",
+    "ua": "Введіть логін..."
   },
   {
-    "id,en,pl,ua": "password,Password,Hasło,Пароль"
+    "id": "password",
+    "en": "Password",
+    "pl": "Hasło",
+    "ua": "Пароль"
   },
   {
-    "id,en,pl,ua": "enterPassword,Enter password...,Wprowadź hasło...,Введіть пароль..."
+    "id": "enterPassword",
+    "en": "Enter password...",
+    "pl": "Wprowadź hasło...",
+    "ua": "Введіть пароль..."
   },
   {
-    "id,en,pl,ua": "fieldsCantEmpty,Fields can not be empty,Pola nie mogą być puste,Поля не можуть бути порожніми"
+    "id": "fieldsCantEmpty",
+    "en": "Fields can not be empty",
+    "pl": "Pola nie mogą być puste",
+    "ua": "Поля не можуть бути порожніми"
   },
   {
-    "id,en,pl,ua": "incorrectLoginPassword,Incorrect login or password,Nieprawidłowy login lub hasło,Неправильний логін або пароль"
+    "id": "incorrectLoginPassword",
+    "en": "Incorrect login or password",
+    "pl": "Nieprawidłowy login lub hasło",
+    "ua": "Неправильний логін або пароль"
   },
   {
-    "id,en,pl,ua": "loginUsed,Login is already used,Login jest już używany,Логін уже використовується"
+    "id": "loginUsed",
+    "en": "Login is already used",
+    "pl": "Login jest już używany",
+    "ua": "Логін уже використовується"
   },
   {
-    "id,en,pl,ua": "passwordDoesntMatch,Password and Confirm does not match,Hasło i potwierdzenie nie pasują,Пароль і підтвердження не збігаються"
+    "id": "passwordDoesntMatch",
+    "en": "Password and Confirm does not match",
+    "pl": "Hasło i potwierdzenie nie pasują",
+    "ua": "Пароль і підтвердження не збігаються"
   },
   {
-    "id,en,pl,ua": "confirm,Confirm,Potwierdzenie,Підтвердження"
+    "id": "confirm",
+    "en": "Confirm",
+    "pl": "Potwierdzenie",
+    "ua": "Підтвердження"
   },
   {
-    "id,en,pl,ua": "confirmPassword,Confirm password...,Potwierdź hasło...,Підтвердіть пароль..."
+    "id": "confirmPassword",
+    "en": "Confirm password...",
+    "pl": "Potwierdź hasło...",
+    "ua": "Підтвердіть пароль..."
   },
   {
-    "id,en,pl,ua": "settings,Settings,Ustawienia,Налаштування"
+    "id": "settings",
+    "en": "Settings",
+    "pl": "Ustawienia",
+    "ua": "Налаштування"
   },
   {
-    "id,en,pl,ua": "musicOn,Music: on,Muzyka: wł,Музика: увімк"
+    "id": "musicOn",
+    "en": "Music: on",
+    "pl": "Muzyka: wł",
+    "ua": "Музика: увімк"
   },
   {
-    "id,en,pl,ua": "musicOff,Music: off,Muzyka: wył,Музика: вимкн"
+    "id": "musicOff",
+    "en": "Music: off",
+    "pl": "Muzyka: wył",
+    "ua": "Музика: вимкн"
   },
   {
-    "id,en,pl,ua": "soundOn,Sound: on,Dzwięk: wł,Звук: увімк"
+    "id": "soundOn",
+    "en": "Sound: on",
+    "pl": "Dzwięk: wł",
+    "ua": "Звук: увімк"
   },
   {
-    "id,en,pl,ua": "soundOff,Sound: off,Dzwięk: wył,Звук: вимкн"
+    "id": "soundOff",
+    "en": "Sound: off",
+    "pl": "Dzwięk: wył",
+    "ua": "Звук: вимкн"
   },
   {
-    "id,en,pl,ua": "newGame,New Game,Nowa Gra,Нова Гра"
+    "id": "newGame",
+    "en": "New Game",
+    "pl": "Nowa Gra",
+    "ua": "Нова Гра"
   },
   {
-    "id,en,pl,ua": "continue,Continue,Kontyntynuj,Продовжити"
+    "id": "continue",
+    "en": "Continue",
+    "pl": "Kontyntynuj",
+    "ua": "Продовжити"
   },
   {
-    "id,en,pl,ua": "levels,Levels,Poziomy,Рівні"
+    "id": "levels",
+    "en": "Levels",
+    "pl": "Poziomy",
+    "ua": "Рівні"
   },
   {
-    "id,en,pl,ua": "exit,Exit,Wyjście,Вихід"
+    "id": "exit",
+    "en": "Exit",
+    "pl": "Wyjście",
+    "ua": "Вихід"
   },
   {
-    "id,en,pl,ua": "pause,Pause,Pauza,Пауза"
+    "id": "pause",
+    "en": "Pause",
+    "pl": "Pauza",
+    "ua": "Пауза"
   },
   {
-    "id,en,pl,ua": "play,Play,Grać,Грати"
+    "id": "play",
+    "en": "Play",
+    "pl": "Grać",
+    "ua": "Грати"
   },
   {
-    "id,en,pl,ua": "shop,Shop,Sklep,Магазин"
+    "id": "shop",
+    "en": "Shop",
+    "pl": "Sklep",
+    "ua": "Магазин"
   },
   {
-    "id,en,pl,ua": "reset,Reset,Zresetować,Перепройти"
+    "id": "reset",
+    "en": "Reset",
+    "pl": "Zresetować",
+    "ua": "Перепройти"
   },
   {
-    "id,en,pl,ua": "menu,Menu,Menu,Меню"
+    "id": "menu",
+    "en": "Menu",
+    "pl": "Menu",
+    "ua": "Меню"
   },
   {
-    "id,en,pl,ua": "gameOver,GameOver,Koniec Gry,Кінець Гри"
+    "id": "gameOver",
+    "en": "GameOver",
+    "pl": "Koniec Gry",
+    "ua": "Кінець Гри"
   },
   {
-    "id,en,pl,ua": "win,Win,Wygrana,Перемога"
+    "id": "win",
+    "en": "Win",
+    "pl": "Wygrana",
+    "ua": "Перемога"
   },
   {
-    "id,en,pl,ua": "next,Next,Następny,Далі"
+    "id": "next",
+    "en": "Next",
+    "pl": "Następny",
+    "ua": "Далі"
   },
   {
-    "id,en,pl,ua": "buy,Buy,Kupić,Купити"
+    "id": "buy",
+    "en": "Buy",
+    "pl": "Kupić",
+    "ua": "Купити"
   },
   {
-    "id,en,pl,ua": "sureYouWantReset,Are you sure, you want to reset your progress and start a new game?,Czy na pewno chcesz zresetować progres i rozpocząć nową grę?,Ви впевнені, що хочете скинути свій прогрес і почати нову гру?"
+    "id": "sureYouWantReset",
+    "en": "Are you sure, you want to reset your progress and start a new game?",
+    "pl": "Czy na pewno chcesz zresetować progres i rozpocząć nową grę?",
+    "ua": "Ви впевнені, що хочете скинути свій прогрес і почати нову гру?"
   },
   {
-    "id,en,pl,ua": "yes,Yes,Tak,Так"
+    "id": "yes",
+    "en": "Yes",
+    "pl": "Tak",
+    "ua": "Так"
   },
   {
-    "id,en,pl,ua": "no,No,Nie,Ні"
+    "id": "no",
+    "en": "No",
+    "pl": "Nie",
+    "ua": "Ні"
   },
   {
-    "id,en,pl,ua": "close,Close,Zamknij,Закрити"
+    "id": "close",
+    "en": "Close",
+    "pl": "Zamknij",
+    "ua": "Закрити"
   }
 ]

@@ -2,6 +2,7 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 using ChoETL;
+using Newtonsoft.Json;
 using UnityEditor;
 
 namespace Code.Utils.Editor
@@ -28,7 +29,8 @@ namespace Code.Utils.Editor
             StringBuilder sb = new StringBuilder();
             using (var p = ChoCSVReader.LoadText(csv).WithFirstLineHeader().MayHaveQuotedFields().MayContainEOLInData())
             {
-                using (var w = new ChoJSONWriter(sb))
+                ChoJSONRecordConfiguration config = new ChoJSONRecordConfiguration { CultureName = "en-US" };
+                using (var w = new ChoJSONWriter(sb,config))
                 {
                     w.Write(p);
                 }

@@ -161,16 +161,19 @@ MonoBehaviour:
     en: Are you sure, you want to reset your progress and start a new game?
     pl: "Czy na pewno chcesz zresetowa\u0107 progres i rozpocz\u0105\u0107 now\u0105
       gr\u0119?"
-    ua: 
+    ua: "\u0412\u0438 \u0432\u043F\u0435\u0432\u043D\u0435\u043D\u0456, \u0449\u043E
+      \u0445\u043E\u0447\u0435\u0442\u0435 \u0441\u043A\u0438\u043D\u0443\u0442\u0438
+      \u0441\u0432\u0456\u0439 \u043F\u0440\u043E\u0433\u0440\u0435\u0441 \u0456
+      \u043F\u043E\u0447\u0430\u0442\u0438 \u043D\u043E\u0432\u0443 \u0433\u0440\u0443?"
   - id: yes
     en: Yes
     pl: Tak
-    ua: 
+    ua: "\u0422\u0430\u043A"
   - id: no
     en: No
     pl: Nie
-    ua: 
+    ua: "\u041D\u0456"
   - id: close
     en: Close
     pl: Zamknij
-    ua: 
+    ua: "\u0417\u0430\u043A\u0440\u0438\u0442\u0438"
