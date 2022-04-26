@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.IO;
 using System.Text;
 using UnityEngine;
@@ -29,7 +30,11 @@ namespace Code.Utils.Editor
             StringBuilder sb = new StringBuilder();
             using (var p = ChoCSVReader.LoadText(csv).WithFirstLineHeader().MayHaveQuotedFields().MayContainEOLInData())
             {
-                ChoJSONRecordConfiguration config = new ChoJSONRecordConfiguration { CultureName = "en-US" };
+                ChoJSONRecordConfiguration config = new ChoJSONRecordConfiguration
+                {
+                    CultureName = "en-US", 
+                    Culture = CultureInfo.GetCultureInfo("en-US")
+                };
                 using (var w = new ChoJSONWriter(sb,config))
                 {
                     w.Write(p);
