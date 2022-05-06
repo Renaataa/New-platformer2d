@@ -1,5 +1,7 @@
+using System;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 using ChoETL;
@@ -15,44 +17,60 @@ namespace Code.Utils.Editor
         
         private const string inputPath = "Data/Input/";
         private const string outputPath = "Data/Output/";
-
+        
         private void ConvertCSV()
         {
             if (!ArePathsValid())
             {
                 return;
             }
-
+            
             string inPath = Path.Combine(Application.dataPath, inputPath, inputFileName);
             string outPath = Path.Combine(Application.dataPath, outputPath);
             
             string csv = File.ReadAllText(inPath);
-            StringBuilder sb = new StringBuilder();
-            using (var p = ChoCSVReader.LoadText(csv).WithFirstLineHeader().MayHaveQuotedFields().MayContainEOLInData())
+            string json = String.Empty;;
+            
+            foreach (CultureInfo info in CultureInfo.GetCultures(CultureTypes.NeutralCultures))
             {
-                ChoJSONRecordConfiguration config = new ChoJSONRecordConfiguration
+                if (string.IsNullOrEmpty(info.Name))
                 {
-                    CultureName = "en-US", 
-                    Culture = CultureInfo.GetCultureInfo("en-US")
-                };
-                using (var w = new ChoJSONWriter(sb,config))
-                {
-                    w.Write(p);
+                    continue;
                 }
+                StringBuilder sb = new StringBuilder();
+                using (var p = ChoCSVReader.LoadText(csv).WithFirstLineHeader().MayHaveQuotedFields().MayContainEOLInData())
+                {
+                    ChoJSONRecordConfiguration config = new ChoJSONRecordConfiguration
+                    {
+                        Culture = info
+                    };
+                    using (var w = new ChoJSONWriter(sb,config))
+                    {
+                        w.Write(p);
+                    }
+                }
+
+                if (sb.ToString().Substring(13, 1) != "\"")
+                {
+                    continue;
+                }
+                
+                json = sb.ToString();
+                break;
             }
 
             if (!Directory.Exists(outPath))
             {
                 Directory.CreateDirectory(outPath);
             }
-
+            
             outPath = Path.Combine(outPath, outputFileName);
             if (!File.Exists(outPath))
             {
-               var file = File.Create(outPath);
-               file.Close();
+                var file = File.Create(outPath);
+                file.Close();
             }
-            File.WriteAllText(outPath, sb.ToString());
+            File.WriteAllText(outPath, json);
             AssetDatabase.Refresh();
         }
 
@@ -102,5 +120,6 @@ namespace Code.Utils.Editor
                 TranslationsTools.PopulateDictionaries(path);
             }
         }
+        
     }
 }
