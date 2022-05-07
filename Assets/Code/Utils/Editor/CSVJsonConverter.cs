@@ -49,8 +49,8 @@ namespace Code.Utils.Editor
                         w.Write(p);
                     }
                 }
-
-                if (sb.ToString().Substring(13, 1) != "\"")
+                
+                if (sb.ToString().Substring(15, 1) != "\"")
                 {
                     continue;
                 }

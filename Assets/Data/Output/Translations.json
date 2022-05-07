@@ -140,7 +140,7 @@
   {
     "id": "continue",
     "en": "Continue",
-    "pl": "Kontyntynuj",
+    "pl": "Kontynuować",
     "ua": "Продовжити"
   },
   {
@@ -232,5 +232,53 @@
     "en": "Close",
     "pl": "Zamknij",
     "ua": "Закрити"
+  },
+  {
+    "id": "page1",
+    "en": "Instruction \n\nThe main character moves with the joystick (lower left corner of the screen): to the right - goes to the right, to the left - goes to the left, down - to sit down, up - to jump.  \n\nPC - The main character moves with “WASD”: D - goes to the right, A - goes to the left, S - to sit down, W - to jump.  \n\nTo hit enemies press a gray button (lower right corner of the screen), you can also hit while jumping.",
+    "pl": "Instrukcja \n\nGłówny bohater porusza się za pomocą joysticka (lewy dolny róg ekranu): w prawo – schodzi w prawo, w lewo – schodzi w lewo, w dół – siada, w górę – skacze.  \n\nPC - Główny bohater porusza się za pomocą „WASD”: D - idzie w prawo, A - idzie w lewo, S - siada, W - skacze. \n\nAby trafić wrogów, naciśnij szary przycisk (prawy dolny róg ekranu), możesz również uderzać podczas skoku.",
+    "ua": "Інструкція   \n\nГоловний герой рухається за допомогою джойстика (лівий нижній кут екрану): праворуч — йде вправо, ліворуч — йде вліво, вниз — сідає, вгору — стрибає.  \n\nПК - Головний герой рухається за допомогою «WASD»: D - йде вправо, A - йде ліворуч, S - сідає, W - стрибає. \n\nЩоб вразити ворогів, натисніть сіру кнопку (нижній правий кут екрана), ви також можете вдарити під час стрибка."
+  },
+  {
+    "id": "page2",
+    "en": "Enemies. \n\nGoul is the weakest, walks from side to side without noticing the player.  \nWizard, seeing the player, begins to throw fireballs in his direction. \nAngel is the strongest. Seeing the player flies in his direction.",
+    "pl": "Wrogowie.  \n\nWampir jest najsłabszy, chodzi z boku na bok, nie zauważając gracza.  \nCzarodziej widząc gracza zaczyna rzucać w jego kierunku kulami ognia.\nAnioł jest najsilniejszy. Widząc gracza leci w jego kierunku.",
+    "ua": "Вороги.  \n\nВампір найслабший, він ходить з боку в бік, не помічаючи гравця.  \nЧарівник, побачивши гравця, починає кидати в нього вогняні кулі. \nАнгел найсильніший. Побачивши, гравець летить до нього."
+  },
+  {
+    "id": "page3",
+    "en": "Enemies dealing damage to the player take away his health. The life bar is in the upper left corner.",
+    "pl": "Wrogowie zadając obrażenia graczowi odbierają mu zdrowie. Pasek życia znajduje się w lewym górnym rogu.",
+    "ua": "Вороги, завдаючи шкоди гравцеві, позбавляють його здоров'я. Панель здоров’я знаходиться у верхньому лівому куті."
+  },
+  {
+    "id": "page4",
+    "en": "After defeating the enemy, a bar of energy is replenished (below the bar of life). When it is full, you can use the blue button in the lower right corner of the screen. It will increase the strength of the hero for a while. \nAt later levels, lava appears. The player dies immediately after touching it.",
+    "pl": "Po pokonaniu wroga pasek energii odnawia się (poniżej paska życia). Gdy jest pełny, możesz użyć niebieskiego przycisku w prawym dolnym rogu ekranu. Na chwilę zwiększy siłę bohatera. \n\nNa późniejszych poziomach pojawia się lawa. Gracz umiera natychmiast po dotknięciu.",
+    "ua": "Після перемоги над ворогом смужка енергії оновлюється (нижче панелі здоров’я). Коли вона заповниться, ви можете скористатися синьою кнопкою в нижньому правому куті екрана. Це на деякий час збільшить силу героя. \nЛава з'являється на більш пізніх рівнях. Гравець відразу ж гине при дотику."
+  },
+  {
+    "id": "page5",
+    "en": "Boosts.  \n\nRed restores some health.  \nPurple prevents enemies from damaging the player for 5 seconds. \nGreen increases jump height for 5 seconds. \nLight blue increases the player's speed for 5 seconds. \n\nWhen using the last 3, you can see the animation of the timer. This way you can know when the boost has expired. \n\nBoosts can be found on the level or bought in the store. To enter the store, press the pause button (upper right corner) and enter the store. Available boosts are in the boost panel at the bottom of the screen. \n\nAlso in the pause panel, you can reset the level or exit to the main menu.",
+    "pl": "Wzmocnienia.  \n\nCzerwony przywraca część zdrowia.  \nFioletowy zapobiega zadawaniu obrażeń graczowi przez wrogów przez 5 sekund.  \nZielony zwiększa wysokość skoku na 5 sekund.  \nNiebieski zwiększa prędkość gracza na 5 sekund. \n\nKorzystając z ostatnich 3, możesz zobaczyć animację timera. W ten sposób możesz wiedzieć, kiedy wzmocnienie wygasło. \n\nWzmocnienia można znaleźć na poziomie lub kupić w sklepie. Aby wejść do sklepu, naciśnij przycisk pauzy (prawy górny róg) i wejdź do sklepu. Dostępne wzmocnienia znajdują się w odpowiednim panelu na dole ekranu. \n\nRównież w panelu pauzy możesz zresetować poziom lub wyjść do menu głównego.",
+    "ua": "Підкріплення.  \n\nЧервоний зцілює частину здоров’я.  \nФіолетовий не дозволяє ворогам завдати шкоди гравцеві протягом 5 секунд.  \nЗелений збільшує висоту стрибка на 5 секунд.  \nСиній збільшує швидкість гравця на 5 секунд.  \n\nВикористовуючи останні 3, ви можете побачити анімацію таймера. Таким чином ви можете знати, коли бафф закінчився.  \n\nБонуси можна знайти на рівні або придбати в магазині. Щоб увійти в магазин, натисніть кнопку паузи (правий верхній кут) і увійдіть в магазин. Доступні бафи розташовані у відповідній панелі внизу екрана.  \n\nТакож на панелі паузи можна зресетувати рівень або вийти в головне меню."
+  },
+  {
+    "id": "page7",
+    "en": "Coins for shopping can be collected at a level one at a time or 10 in chests. The number of coins is displayed in the upper right corner of the screen.",
+    "pl": "Monety na zakupy można zbierać na poziomie pojedynczo lub po 10 w skrzyniach. Liczba monet wyświetlana jest w prawym górnym rogu ekranu.",
+    "ua": "Монети можна збирати окремо або по 10 в скрині. Кількість монет відображається у верхньому правому куті екрана."
+  },
+  {
+    "id": "page8",
+    "en": "Main menu. \n\nTo start a new game, click the first button. This will reset all previous game progress. \n\nIf you want to start the game from the last available level, click the “continue” button. \n\nIt is possible to create several different accounts. To do this, click the “account” button, exit the current one and register a new one. After registration, autologin will come. To switch between accounts, repeat the procedure, but instead of registering, log in. The name of the current user is displayed in the upper right corner of the panel. \n\nIf you want to replay a level, click the “levels” button and select the one you need.",
+    "pl": "Menu główne.  \n\nAby rozpocząć nową grę, kliknij pierwszy przycisk. Spowoduje to zresetowanie wszystkich poprzednich postępów w grze.  \n\nJeśli chcesz rozpocząć grę od ostatniego dostępnego poziomu, kliknij przycisk „kontyntynuj”. \n\nMożliwe jest utworzenie kilku różnych kont. Aby to zrobić, kliknij przycisk „konto”, wyjdź z obecnego i zarejestruj nowe. Po rejestracji nadejdzie autologowanie. Aby przełączać się między rachunkami, powtórz procedurę, ale zamiast rejestracji zaloguj się. W prawym górnym rogu panelu wyświetlana jest nazwa aktualnego użytkownika. \n\nJeśli chcesz powtórzyć poziom, kliknij przycisk „poziomy” i wybierz ten, którego potrzebujesz.",
+    "ua": "Головне меню.  \n\nЩоб почати нову гру, натисніть на першу кнопку. Це скине весь попередній хід гри.  \n\nЯкщо ви хочете почати гру з останнього доступного рівня, натисніть кнопку «Продовжити».  \n\nМожна створити кілька різних облікових записів. Для цього натисніть кнопку «акаунт», вийдіть із поточного та зареєструйте новий. Після реєстрації ви автоматично залогуєтесь. Щоб переключитися між обліковими записами, повторіть процедуру, але залогуйтесь замість реєстрації. Ім’я поточного користувача відображається у верхньому правому куті панелі.  \n\nЯкщо ви хочете повторити рівень, перейдіть на панель рівнів і виберіть потрібний."
+  },
+  {
+    "id": "page9",
+    "en": "Each new level opens upon successful completion of the previous one. The number of coins and boosts are saved upon successful completion of the level. \n\nAfter the game ends, progress recording will stop. It will remain the same as at the end of the game. \n\nTo exit the game, click the last button in the menu. \n\nThe settings are in the lower left corner. There you can turn on / off the music and sounds. And also change the language to English, Polish or Ukrainian. \n\n \n\nHave a nice game!",
+    "pl": "Każdy nowy poziom otwiera się po pomyślnym ukończeniu poprzedniego. Liczba monet i doładowań jest zapisywana po pomyślnym ukończeniu poziomu.  \n\nPo zakończeniu gry nagrywanie postępów zostanie zatrzymane. Pozostanie to samo, co pod koniec gry. \n\nAby wyjść z gry, kliknij ostatni przycisk w menu.  \n\nUstawienia znajdują się w lewym dolnym rogu. Tam możesz włączyć / wyłączyć muzykę i dźwięki. A także zmień język na angielski, polski lub ukraiński. \n \n\n\n\nMiłej gry!",
+    "ua": "Кожен новий рівень відкривається після успішного проходження попереднього. Кількість монет і поповнень зберігається після успішного проходження рівня.  \n\nЗапис прогресу гры зупиниться, коли гра закінчиться. Він залишиться таким же, як і в кінці гри.  \n\nЩоб вийти з гри, натисніть останню кнопку в меню.  \n\nНалаштування знаходяться в нижньому лівому куті. Там можна вмикати/вимикати музику та звуки. А також змінити мову на англійську, польську чи українську.  \n\n  \n\nГарної гри!"
   }
 ]
