@@ -26,10 +26,12 @@ namespace Code.BaseSystems.Translations
                 Instance = this;
                 DontDestroyOnLoad(Instance.gameObject);
             }
-            if(dictionary == null)
-            {
-                dictionary = AssetDatabase.LoadAssetAtPath("Assets/Data/TranslationsDictionary.asset", typeof(TranslationsSO)) as TranslationsSO;
-            }
+            #if UNITY_EDITOR
+                if(dictionary == null)
+                {
+                    dictionary = AssetDatabase.LoadAssetAtPath("Assets/Data/TranslationsDictionary.asset", typeof(TranslationsSO)) as TranslationsSO;
+                }
+            #endif
             dictionary?.Prepare();
             
             SettingsManager.Instance.OnLanguageChange += SettingsManager_OnLanguageChange;
